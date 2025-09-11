@@ -34,7 +34,7 @@ app.get("/regiok", (req,res) =>
 })
 app.get("/a", (req,res) =>
     {
-        const sql = "select * from `regiok` where  regionev like '%g%";
+        const sql = "select * from `regiok` where  regionev like '%g%'";
         db.query(sql, (err, result) =>{
             if(err) return res.json(err);
             return res.json(result)
@@ -53,10 +53,17 @@ app.get("/a", (req,res) =>
     
         app.get("/c", (req,res) =>
             {
-                const sql = "select * from `regiok` GROUP BY regionev desc";
+                const sql = "select min(hossz) from `kozutak_hossza` ";
                 db.query(sql, (err, result) =>{
                     if(err) return res.json(err);
                     return res.json(result)
             
                 })
             })
+app.delete("/torles", (req,res) =>{
+    const sql = "delete from `regiok` where rid =?";
+    db.query(sql, [req.params.id], (err, result) =>{
+        if(err) return res.json(err);
+        return res.json(result)
+    })
+})            
