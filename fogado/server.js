@@ -5,7 +5,7 @@ const mysql = require("mysql");
 
 
 
-app.use(cors());   
+app.use(cors());   //implementálja az összes modult
 
 //adatbázis kapcsolatot beállítja
 const db = mysql.createConnection({
@@ -24,7 +24,7 @@ app.get("/agy", (req,res) =>
     {
         const sql = "select sznev, agy from `szobak`    ";
         db.query(sql, (err, result) =>{
-            if(err) return res.json(err);
+            if(err) return res.json(err); //hiba üzenet
             return res.json(result)
     
         })
